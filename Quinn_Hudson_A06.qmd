@@ -226,7 +226,11 @@ max_temps <- read_tsv("state_max_temps.tsv") |>
 Calculate the average temperature for each month across the whole data frame (using the data for all three states together).
 
 ```{r}
+max_temps_numbers = as.data.frame(lapply(max_temps, as.numeric)) #converts all the values to numbers
 
+avg_temps = apply(max_temps_numbers, 2, mean, na.rm = TRUE) #apply function to find the mean temps per column
+
+avg_temps
 ```
 
 
@@ -241,7 +245,11 @@ Create three new data frames by slicing the data by state.
 No need to print any output here.
 
 ```{r}
+temps_co = subset(x = max_temps, subset = state == "CO", select = c(names(max_temps)))
 
+temps_oh = subset(x = max_temps, subset = state == "OH", select = c(names(max_temps)))
+
+temps_va = subset(x = max_temps, subset = state == "VA", select = c(names(max_temps)))
 ```
 
 
@@ -262,7 +270,28 @@ Example (this is NOT the answer just an example of what goes in the {}):
 Note: This code should still run successfully even if the numbers were to change.
 
 ```{r}
+temps_co_numbers = as.data.frame(apply(temps_co, 1:2, as.numeric)) #converts temps_co to numeric and back to a data frame
+temps_co_numbers = temps_co_numbers[, -c(1,2)] #removes state and year columns
 
+all_median_temps = apply(temps_co_numbers, 1, median, na.rm = TRUE) #the median temps
+
+years = 1895:2020 #sequence to correspond to the years with median temperatures
+
+median_temps_data_frame = data.frame(#creating a data frame with median temperatures and years
+  year = years,
+  median_temp = all_median_temps)
+
+#Finds the max and median temperatures and their corresponding years and minimum and median temperatures and their corresponding years
+
+max_median_temp = med_temps_data_frame$median_temp[which.max(median_temps_data_frame$median_temp)]
+
+max_year = med_temps_data_frame$year[which.max(median_temps_data_frame$median_temp)]
+
+min_median_temp = med_temps_data_frame$median_temp[which.min(median_temps_data_frame$median_temp)]
+
+min_year = med_temps_data_frame$year[which.min(median_temps_data_frame$median_temp)]
+
+print(paste0("The maximum median annual temperature of ", max_median_temp, " occurred in ", max_year, " and the minimum median annual temperature of ", min_median_temp, " occurred in ", min_year, "."))
 ```
 
 
