@@ -31,7 +31,7 @@ The grader cannot grade what they cannot see! Failure to render your document af
 
 ## Question 1 (5 points)
 
-Link your RStudio to your GitHub account and create a **public** repository where you will commit and push this assignment to. We will be following the instructions in [https://github.com/hudsonquinn0/Quinn_Hudson_201_A06](https://github.com/hudsonquinn0/Quinn_Hudson_201_A06) The chapters listed below are referring to this book.
+Link your RStudio to your GitHub account and create a **public** repository where you will commit and push this assignment to. We will be following the instructions in [https://happygitwithr.com/](https://happygitwithr.com/) The chapters listed below are referring to this book.
 
 
 Refer to the **instructions html** for this question! The instructions to setup GitHub are not included in this template to save space.
@@ -48,7 +48,7 @@ To get full credit for this Question you must:
 
 ## Github Repo Link
 
-[https://your-github-repo-url](https://your-github-repo-url)
+[https://github.com/hudsonquinn0/Quinn_Hudson_201_A06](https://github.com/hudsonquinn0/Quinn_Hudson_201_A06)
 
 :::
 
@@ -56,7 +56,7 @@ To get full credit for this Question you must:
 
 ## Screenshot/image of RStudio
 
-![](filepath.png)
+![](github_setup.png)
 
 :::
 
@@ -102,7 +102,9 @@ Extract the value `8162` (LeBron James points) in 2 different ways:
 - using names
 
 ```{r}
+player_info[[2]][[4]] #indexing
 
+player_info$LJ$points #naming
 ```
 
 
@@ -113,7 +115,13 @@ Add a new named element to the end of each player's list called `height`. The he
 Print the `player_info` list to prove you were successful.
 
 ```{r}
+player_info$MJ$height = 78 #appends player info mj with a new key for height and its corresponding value
+player_info$LJ$height = 81
+player_info$KB$height = 78
+player_info$KA$height = 86
+player_info$SO$height = 85
 
+print(player_info)
 ```
 
 
@@ -132,6 +140,14 @@ Hint: initialize an empty list
 Note: this must still run correctly even if the values were to change or if another player were added to the list or if the player order changed.
 
 ```{r}
+points_per_game_list = list()#initialized list
+
+for(i in names(player_info)){
+points = player_info[[i]]$points #extracts points value for each player from the list
+games_played = player_info[[i]]$games_played #extracts games value for each player from the list
+points_per_game_list[[i]] = points / games_played #appends points_per_game_list keys for each player with PPG value
+}
+print(points_per_game_list)
 
 ```
 
@@ -143,7 +159,12 @@ Use the list created in Part c and an appropriate apply function to round each v
 Store the output as a vector and print the results.
 
 ```{r}
+rounded_points_per_game = c()
+for (i in names(points_per_game_list)){ #iterates through list
+rounded_points_per_game[i] = round(points_per_game_list[[i]], 2)#rounds the ppg values and puts them in vector
+}
 
+print(rounded_points_per_game)
 ```
 
 
