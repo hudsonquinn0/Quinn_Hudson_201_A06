@@ -283,13 +283,13 @@ median_temps_data_frame = data.frame(#creating a data frame with median temperat
 
 #Finds the max and median temperatures and their corresponding years and minimum and median temperatures and their corresponding years
 
-max_median_temp = med_temps_data_frame$median_temp[which.max(median_temps_data_frame$median_temp)]
+max_median_temp = median_temps_data_frame$median_temp[which.max(median_temps_data_frame$median_temp)]
 
-max_year = med_temps_data_frame$year[which.max(median_temps_data_frame$median_temp)]
+max_year = median_temps_data_frame$year[which.max(median_temps_data_frame$median_temp)]
 
-min_median_temp = med_temps_data_frame$median_temp[which.min(median_temps_data_frame$median_temp)]
+min_median_temp = median_temps_data_frame$median_temp[which.min(median_temps_data_frame$median_temp)]
 
-min_year = med_temps_data_frame$year[which.min(median_temps_data_frame$median_temp)]
+min_year = median_temps_data_frame$year[which.min(median_temps_data_frame$median_temp)]
 
 print(paste0("The maximum median annual temperature of ", max_median_temp, " occurred in ", max_year, " and the minimum median annual temperature of ", min_median_temp, " occurred in ", min_year, "."))
 ```
