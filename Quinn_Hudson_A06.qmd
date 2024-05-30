@@ -160,7 +160,7 @@ Store the output as a vector and print the results.
 
 ```{r}
 rounded_points_per_game = c()
-for (i in names(points_per_game_list)){ #iterates through list
+for(i in names(points_per_game_list)){ #iterates through list
 rounded_points_per_game[i] = round(points_per_game_list[[i]], 2)#rounds the ppg values and puts them in vector
 }
 
@@ -185,6 +185,23 @@ ie: 91 rounds to 90; 173 rounds to 200; 1450 rounds to 1000
 Hint: use `MARGIN = 1:2` to apply the function to each value instead of only a row/col.
 
 ```{r}
+round_function = function(x){ #round function
+  if(10 <= x && x< 100){
+    return(round(x, -1))#round to tens if x is double digits
+  }else if(100 <= x && x < 1000){
+    return(round(x, -2))#rounds to 3 hundreds if 3 digits
+  }else if(x >= 1000){
+    return(round(x, -3))#rounds to 3 thousands if 4 digits
+  }
+}
+
+rounded_mat_rand = apply(mat_rand, MARGIN = 1:2, FUN = round_function) #apply funct that uses round_function
+print("ORIGINAL MATRIX") #for clarity grading the original matrix is displayed
+print(mat_rand)
+
+print("ROUNDED MATRIX")
+print(rounded_mat_rand) #rounded matrix
+
 
 ```
 
